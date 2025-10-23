@@ -30,37 +30,36 @@ const navigation = [
   {
     title: "Activité",
     items: [
-      { href: "/app/dashboard", label: "Accueil", icon: "/assets/icons/home.svg" },
-      { href: "/app/dashboard/agenda", label: "Agenda", icon: "/assets/icons/calendar.svg" },
-      { href: "/app/dashboard/dossiers", label: "Dossiers", icon: "/assets/icons/folder-open.svg" },
-      { href: "/app/dashboard/assistant", label: "Assistant juridique", icon: "/assets/icons/ai.svg" },
+      { href: "/home", label: "Accueil", icon: "/assets/icons/home.svg" },
+      { href: "/calendar", label: "Agenda", icon: "/assets/icons/calendar.svg" },
+      { href: "/cases", label: "Dossiers", icon: "/assets/icons/folder-open.svg" },
+      { href: "/assistant", label: "Assistant juridique", icon: "/assets/icons/ai.svg" },
     ],
   },
   {
     title: "Cabinet",
     items: [
-      { href: "/app/dashboard/clientele", label: "Clientèle", icon: "/assets/icons/users.svg" },
-      { href: "/app/dashboard/facturation", label: "Facturation", icon: "/assets/icons/receipt-item.svg" },
-      { href: "/app/dashboard/comptabilite", label: "Comptabilité", icon: "/assets/icons/wallet.svg" },
-      { href: "/app/dashboard/collaborateurs", label: "Collaborateurs & Gestion temps", icon: "/assets/icons/user-group.svg" },
-      { href: "/app/dashboard/partage", label: "Espace de partage", icon: "/assets/icons/folder-transfer.svg" },
+      { href: "/clients", label: "Clientèle", icon: "/assets/icons/users.svg" },
+      { href: "/billing", label: "Facturation", icon: "/assets/icons/receipt-item.svg" },
+      { href: "/accounting", label: "Comptabilité", icon: "/assets/icons/wallet.svg" },
+      { href: "/team", label: "Collaborateurs & Gestion temps", icon: "/assets/icons/user-group.svg" },
+      { href: "/shared-space", label: "Espace de partage", icon: "/assets/icons/folder-transfer.svg" },
     ],
   },
   {
     title: "Configuration",
     items: [
-      { href: "/app/dashboard/parametres", label: "Paramètres", icon: "/assets/icons/setting-2.svg" },
-      { href: "/app/dashboard/aide", label: "Aide & Support", icon: "/assets/icons/help.svg" },
+      { href: "/settings", label: "Paramètres", icon: "/assets/icons/setting-2.svg" },
+      { href: "/help", label: "Aide & Support", icon: "/assets/icons/help.svg" },
     ],
   },
 ];
 
-export function DashboardSidebar() {
+export function MainSidebar() {
   const pathname = usePathname();
   const [timer, setTimer] = useState({ hours: 0, minutes: 0, seconds: 0 });
   const [isRunning, setIsRunning] = useState(false);
 
-  // Timer logic
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (isRunning) {
@@ -86,7 +85,7 @@ export function DashboardSidebar() {
   const formatTime = () => {
     const mins = timer.hours * 60 + timer.minutes;
     const secs = timer.seconds;
-    return `${mins} min ${secs.toString().padStart(2, "0")}s`;
+    return mins + " min " + secs.toString().padStart(2, "0") + "s";
   };
 
   const resetTimer = () => {
@@ -130,26 +129,27 @@ export function DashboardSidebar() {
                         <Link
                           href={item.href}
                           className={cn(
-                            "h-10 px-3 rounded-lg transition-all duration-200 group relative",
-                            isActive 
-                              ? "bg-zinc-100 text-zinc-900 font-medium shadow-sm" 
-                              : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                            "h-10 px-3 rounded-lg group relative",
+                            "transition-all duration-200 ease-in-out",
+                            isActive
+                              ? "bg-[#F6F6F3] text-zinc-900 ring-primary/25 ring-inset"
+                              : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 hover:ring-1 hover:ring-zinc-200/50 hover:ring-inset active:ring-2 active:ring-primary/30 active:ring-inset active:bg-zinc-100/80"
                           )}
                         >
                           <img
                             src={item.icon}
                             alt=""
                             className={cn(
-                              "h-[18px] w-[18px] transition-all",
+                              "h-[18px] w-[18px] transition-opacity duration-200 relative z-10",
                               isActive ? "opacity-100" : "opacity-70 group-hover:opacity-90"
                             )} 
                           />
-                          <span className="font-rethink-sans text-sm font-normal transition-all">
+                          <span className={cn(
+                            "font-rethink-sans text-sm relative z-10 transition-all duration-200",
+                            isActive ? "font-medium" : "font-normal"
+                          )}>
                             {item.label}
                           </span>
-                          {isActive && (
-                            <ChevronRight className="h-3.5 w-3.5 ml-auto text-zinc-400" strokeWidth={2} />
-                          )}
                         </Link>
                       </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -163,7 +163,6 @@ export function DashboardSidebar() {
 
       <SidebarFooter className="border-t-0 px-4 pb-4">
         <div className="space-y-3">
-          {/* Timer */}
           <div className="rounded-xl bg-gradient-to-br from-zinc-50 to-zinc-100/50 border border-zinc-200/60 p-4 shadow-sm">
             <div className="text-center mb-3">
               <div className="text-2xl font-bold text-zinc-900 tabular-nums tracking-tight">
@@ -202,7 +201,6 @@ export function DashboardSidebar() {
 
           <Separator className="bg-zinc-200/60" />
 
-          {/* User */}
           <div className="flex items-center gap-3 px-2 py-1">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/80 text-white text-xs font-bold shrink-0 shadow-sm">
               MD

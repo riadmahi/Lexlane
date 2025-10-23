@@ -1,6 +1,6 @@
 "use client";
 
-import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
+import { MainSidebar } from "@/components/layout/main-sidebar";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 
 export default function AppLayout({
@@ -10,7 +10,7 @@ export default function AppLayout({
 }) {
   return (
     <SidebarProvider>
-      <DashboardSidebar />
+      <MainSidebar />
       <SidebarInset>
         {children}
       </SidebarInset>
