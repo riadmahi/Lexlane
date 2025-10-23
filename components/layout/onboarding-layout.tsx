@@ -9,7 +9,7 @@ import { SlideIn } from "@/components/ui/page-transition";
 
 interface OnboardingLayoutProps {
   children: React.ReactNode;
-  currentStep: 1 | 2 | 3;
+  currentStep: 1 | 2 | 3 | 4;
   onSkip?: () => void;
   skipLabel?: string;
 }
@@ -49,8 +49,9 @@ export function OnboardingLayout({
                 <div className={`h-1 flex-1 rounded-full ${currentStep >= 1 ? 'bg-zinc-900' : 'bg-zinc-200'}`} />
                 <div className={`h-1 flex-1 rounded-full ${currentStep >= 2 ? 'bg-zinc-900' : 'bg-zinc-200'}`} />
                 <div className={`h-1 flex-1 rounded-full ${currentStep >= 3 ? 'bg-zinc-900' : 'bg-zinc-200'}`} />
+                <div className={`h-1 flex-1 rounded-full ${currentStep >= 4 ? 'bg-zinc-900' : 'bg-zinc-200'}`} />
               </div>
-              <p className="text-xs text-zinc-500">Étape {currentStep} sur 3</p>
+              <p className="text-xs text-zinc-500">Étape {currentStep} sur 4</p>
             </div>
 
             {children}

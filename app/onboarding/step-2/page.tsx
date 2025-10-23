@@ -5,8 +5,18 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { OnboardingLayout } from "@/components/layout";
 import { useOnboarding } from "@/hooks/use-onboarding";
+import { Building, Users, MapPin, CheckCircle2 } from "lucide-react";
 
 const PRACTICE_AREAS = [
   "Droit des affaires",
@@ -121,19 +131,21 @@ export default function OnboardingStep2Page() {
 
           <div className="space-y-2">
             <Label htmlFor="cabinetSize" className="text-zinc-900">Taille du cabinet</Label>
-            <select
-              id="cabinetSize"
+            <Select
               value={formData.cabinetSize}
-              onChange={(e) => setFormData({ ...formData, cabinetSize: e.target.value })}
+              onValueChange={(value) => setFormData({ ...formData, cabinetSize: value })}
               required
-              className="flex h-11 w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 focus-visible:ring-offset-2"
             >
-              <option value="">Sélectionnez la taille</option>
-              <option value="solo">Solo (1 personne)</option>
-              <option value="2-5">Petite structure (2-5 personnes)</option>
-              <option value="6-20">Structure moyenne (6-20 personnes)</option>
-              <option value="21+">Grande structure (21+ personnes)</option>
-            </select>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Sélectionnez la taille" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="solo">Solo (1 personne)</SelectItem>
+                <SelectItem value="2-5">Petite structure (2-5 personnes)</SelectItem>
+                <SelectItem value="6-20">Structure moyenne (6-20 personnes)</SelectItem>
+                <SelectItem value="21+">Grande structure (21+ personnes)</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           <div className="space-y-2">

@@ -58,6 +58,14 @@ export interface OnboardingStep3Data {
   skipInvitation?: boolean;
 }
 
+export interface OnboardingStep4Data {
+  openingHours?: {
+    [key: string]: { open: string; close: string; closed: boolean };
+  };
+  appointmentDuration?: number;
+}
+
 export type OnboardingData = OnboardingStep1Data & 
   OnboardingStep2Data & 
-  OnboardingStep3Data;
+  OnboardingStep3Data &
+  OnboardingStep4Data;
