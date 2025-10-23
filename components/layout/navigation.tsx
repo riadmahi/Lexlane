@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import BrandWhite from "@/assets/images/brand-white.svg";
 
@@ -77,8 +78,9 @@ export function Navigation() {
           <Button
             variant="outline"
             className="relative overflow-hidden border-white/20 bg-transparent text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white hover:text-black hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            asChild
           >
-            Se connecter
+            <Link href="/auth/sign-in">Se connecter</Link>
           </Button>
         </div>
       </div>

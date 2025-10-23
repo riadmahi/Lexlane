@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import BrandWhite from "@/assets/images/brand-white.svg";
+import Brand from "@/assets/images/brand.svg";
 
 export const metadata = {
   title: "Mentions légales",
@@ -16,7 +16,7 @@ export default function MentionsLegales() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
-              <Image src={BrandWhite} alt="Lexlane" className="h-24" />
+              <Image src={Brand} alt="Lexlane" className="h-24" />
             </Link>
             <Link href="/">
               <Button variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10">

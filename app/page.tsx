@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/layout/navigation";
 import BrandWhite from "@/assets/images/brand-white.svg";
@@ -17,9 +18,12 @@ export default function Home() {
           <p className="mx-auto mt-6 max-w-2xl font-inter text-base text-white/70 sm:text-lg">
             Une solution complète, boosté par l'IA, sécurisée et conçue pour les professionnels du droit.
           </p>
-          <div className="mt-10">
-            <Button size="lg" className="bg-white text-black hover:bg-white/90">
-              Demander une démo
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Button size="lg" className="bg-white text-black hover:bg-white/90" asChild>
+              <Link href="/auth/sign-up">Commencer gratuitement</Link>
+            </Button>
+            <Button size="lg" variant="outline" className="bg-white/5 border-white/10 text-white hover:bg-white/10" asChild>
+              <Link href="/auth/sign-in">Se connecter</Link>
             </Button>
           </div>
         </div>
