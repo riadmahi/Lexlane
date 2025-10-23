@@ -165,8 +165,38 @@ export function MainSidebar() {
         <div className="space-y-3">
           <div className="rounded-xl bg-gradient-to-br from-zinc-50 to-zinc-100/50 border border-zinc-200/60 p-4 shadow-sm">
             <div className="text-center mb-3">
-              <div className="text-2xl font-bold text-zinc-900 tabular-nums tracking-tight">
-                {formatTime()}
+              <div className="text-2xl font-bold text-zinc-900 tabular-nums tracking-tight inline-flex items-baseline gap-1" style={{ perspective: '400px' }}>
+                <div className="inline-flex flex-col items-center relative h-8 overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>
+                  <span 
+                    key={`min-${timer.hours * 60 + timer.minutes}`}
+                    className="animate-[flipIn_0.5s_cubic-bezier(0.16,1,0.3,1)_both]"
+                    style={{ transformOrigin: '50% 50%' }}
+                  >
+                    {timer.hours * 60 + timer.minutes}
+                  </span>
+                </div>
+                <span className="text-sm text-zinc-500 font-medium">min</span>
+                <div className="inline-flex" style={{ transformStyle: 'preserve-3d' }}>
+                  <div className="inline-flex flex-col items-center relative h-8 w-4 overflow-hidden">
+                    <span 
+                      key={`sec-tens-${Math.floor(timer.seconds / 10)}`}
+                      className="animate-[flipIn_0.5s_cubic-bezier(0.16,1,0.3,1)_both]"
+                      style={{ transformOrigin: '50% 50%' }}
+                    >
+                      {Math.floor(timer.seconds / 10)}
+                    </span>
+                  </div>
+                  <div className="inline-flex flex-col items-center relative h-8 w-4 overflow-hidden">
+                    <span 
+                      key={`sec-ones-${timer.seconds % 10}`}
+                      className="animate-[flipIn_0.5s_cubic-bezier(0.16,1,0.3,1)_both]"
+                      style={{ transformOrigin: '50% 50%' }}
+                    >
+                      {timer.seconds % 10}
+                    </span>
+                  </div>
+                </div>
+                <span className="text-sm text-zinc-500 font-medium">s</span>
               </div>
             </div>
             <button
