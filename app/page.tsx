@@ -561,13 +561,13 @@ export default function Home() {
                 © 2025 Lexlane. Tous droits réservés.
               </p>
               <div className="flex gap-6">
-                <a href="#" className="font-inter text-sm text-white/40 transition-colors hover:text-white/60">
+                <a href="/legal/legal-notice" className="font-inter text-sm text-white/40 transition-colors hover:text-white/60">
                   Mentions légales
                 </a>
-                <a href="#" className="font-inter text-sm text-white/40 transition-colors hover:text-white/60">
+                <a href="/legal/privacy-policy" className="font-inter text-sm text-white/40 transition-colors hover:text-white/60">
                   Politique de confidentialité
                 </a>
-                <a href="#" className="font-inter text-sm text-white/40 transition-colors hover:text-white/60">
+                <a href="/legal/terms-of-service" className="font-inter text-sm text-white/40 transition-colors hover:text-white/60">
                   CGU
                 </a>
               </div>
