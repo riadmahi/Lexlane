@@ -27,7 +27,7 @@ export default function SignInPage() {
       
       if (formData.email && formData.password) {
         localStorage.setItem("isAuthenticated", "true");
-        router.push("/dashboard");
+        router.push("/app/dashboard");
       } else {
         setError("Veuillez remplir tous les champs");
       }

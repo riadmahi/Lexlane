@@ -97,7 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         error: null,
       });
 
-      router.push("/dashboard");
+      router.push("/app/dashboard");
     } catch (error) {
       setAuthState((prev) => ({
         ...prev,

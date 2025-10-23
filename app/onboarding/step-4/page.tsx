@@ -34,12 +34,12 @@ export default function OnboardingStep4Page() {
     e.preventDefault();
     const validEmails = emails.filter(email => email.trim() !== "");
     saveStep4({ inviteEmails: validEmails });
-    router.push("/dashboard");
+    router.push("/app/dashboard");
   };
 
   const handleSkip = () => {
     skipOnboarding();
-    router.push("/dashboard");
+    router.push("/app/dashboard");
   };
 
   return (

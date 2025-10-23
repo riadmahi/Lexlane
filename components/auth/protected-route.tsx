@@ -39,7 +39,7 @@ export function ProtectedRoute({
 
     // Rediriger si l'utilisateur est connecté et essaie d'accéder aux pages d'auth
     if (!requireAuth && isAuthenticated) {
-      router.push("/dashboard");
+      router.push("/app/dashboard");
     }
   }, [isAuthenticated, isLoading, requireAuth, requireOnboarding, user, router, pathname, redirectTo]);
 

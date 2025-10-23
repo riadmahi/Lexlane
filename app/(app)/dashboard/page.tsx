@@ -10,13 +10,13 @@ export default function DashboardPage() {
   const router = useRouter();
 
   if (!user) {
-    router.push("/auth/sign-in");
+    //router.push("/auth/sign-in");
     return null;
   }
 
   return (
     <div className="min-h-screen bg-zinc-50">
-      <div className="container mx-auto px-6 py-8">
+      <div className="px-8 py-8">
         {/* Header */}
         <FadeIn className="flex items-center justify-between pb-8 border-b border-zinc-200">
           <div>

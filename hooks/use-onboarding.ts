@@ -93,7 +93,7 @@ export function useOnboarding() {
       localStorage.setItem("onboarding_step4", JSON.stringify(data));
       localStorage.setItem("needsOnboarding", "false");
       
-      router.push("/dashboard");
+      router.push("/app/dashboard");
     } catch (err) {
       setError("Erreur lors de la finalisation de l'onboarding");
       throw err;
@@ -104,7 +104,7 @@ export function useOnboarding() {
 
   const skipOnboarding = () => {
     localStorage.setItem("needsOnboarding", "false");
-    router.push("/dashboard");
+    router.push("/app/dashboard");
   };
 
   const goToStep = (step: number) => {
