@@ -1,53 +1,12 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Navigation } from "@/components/layout/navigation";
 import BrandWhite from "@/assets/images/brand-white.svg";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Navigation */}
-      <nav className="fixed top-0 z-50 w-full border-white/10 bg-black/80 backdrop-blur-md">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Image
-                src={BrandWhite}
-                alt="Lexlane"
-                className="h-24"
-              />
-            </div>
-            <div className="hidden items-center gap-10 md:flex">
-              <a 
-                href="#solution" 
-                className="group relative font-rethink-sans text-m font-medium text-white/60 transition-all duration-300 hover:text-white"
-              >
-                La solution
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-white to-white/50 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a 
-                href="#faq" 
-                className="group relative font-rethink-sans text-m font-medium text-white/60 transition-all duration-300 hover:text-white"
-              >
-                Questions fréquentes
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-white to-white/50 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a 
-                href="#about" 
-                className="group relative font-rethink-sans text-m font-medium text-white/60 transition-all duration-300 hover:text-white"
-              >
-                À propos
-                <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-white to-white/50 transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            </div>
-            <Button 
-              variant="outline" 
-              className="relative overflow-hidden border-white/20 bg-transparent rounded text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white hover:text-black hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-            >
-              Se connecter
-            </Button>
-          </div>
-        </div>
-      </nav>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative px-6 pt-32 pb-16 lg:px-8 lg:pt-40">
@@ -239,7 +198,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="px-6 py-24 lg:px-8 lg:py-32">
+      <section id="features" className="px-6 py-24 lg:px-8 lg:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {/* Feature 1 */}
