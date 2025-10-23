@@ -2,22 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
-  Home,
-  Calendar,
-  FolderOpen,
-  Sparkles,
-  Users,
-  Receipt,
-  DollarSign,
-  UserCog,
-  FolderClosed,
-  Settings,
-  HelpCircle,
-  Link as LinkIcon,
   RotateCcw,
   Play,
+  Pause,
   BookOpen,
+  ChevronRight,
+  Link as LinkIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -32,37 +24,39 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 const navigation = [
   {
     title: "Activité",
     items: [
-      { href: "/app/dashboard", label: "Accueil", icon: Home },
-      { href: "/app/dashboard/agenda", label: "Agenda", icon: Calendar },
-      { href: "/app/dashboard/dossiers", label: "Dossiers", icon: FolderOpen },
-      { href: "/app/dashboard/assistant", label: "Assistant juridique", icon: Sparkles },
+      { href: "/app/dashboard", label: "Accueil", icon: "/assets/icons/home.svg" },
+      { href: "/app/dashboard/agenda", label: "Agenda", icon: "/assets/icons/calendar.svg" },
+      { href: "/app/dashboard/dossiers", label: "Dossiers", icon: "/assets/icons/folder-open.svg" },
+      { href: "/app/dashboard/assistant", label: "Assistant juridique", icon: "/assets/icons/ai.svg" },
     ],
   },
   {
     title: "Cabinet",
     items: [
-      { href: "/app/dashboard/clientele", label: "Clientèle", icon: Users },
-      { href: "/app/dashboard/facturation", label: "Facturation", icon: Receipt },
-      { href: "/app/dashboard/comptabilite", label: "Comptabilité", icon: DollarSign },
-      { href: "/app/dashboard/collaborateurs", label: "Collaborateurs & Gestion temps", icon: UserCog },
-      { href: "/app/dashboard/partage", label: "Espace de partage", icon: FolderClosed },
+      { href: "/app/dashboard/clientele", label: "Clientèle", icon: "/assets/icons/users.svg" },
+      { href: "/app/dashboard/facturation", label: "Facturation", icon: "/assets/icons/receipt-item.svg" },
+      { href: "/app/dashboard/comptabilite", label: "Comptabilité", icon: "/assets/icons/wallet.svg" },
+      { href: "/app/dashboard/collaborateurs", label: "Collaborateurs & Gestion temps", icon: "/assets/icons/user-group.svg" },
+      { href: "/app/dashboard/partage", label: "Espace de partage", icon: "/assets/icons/folder-transfer.svg" },
     ],
   },
   {
     title: "Configuration",
     items: [
-      { href: "/app/dashboard/parametres", label: "Paramètres", icon: Settings },
-      { href: "/app/dashboard/aide", label: "Aide & Support", icon: HelpCircle },
+      { href: "/app/dashboard/parametres", label: "Paramètres", icon: "/assets/icons/setting-2.svg" },
+      { href: "/app/dashboard/aide", label: "Aide & Support", icon: "/assets/icons/help.svg" },
     ],
   },
 ];
 
 export function DashboardSidebar() {
+  const pathname = usePathname();
   const [timer, setTimer] = useState({ hours: 0, minutes: 0, seconds: 0 });
   const [isRunning, setIsRunning] = useState(false);
 
@@ -105,88 +99,117 @@ export function DashboardSidebar() {
   };
 
   return (
-    <Sidebar>
-      <SidebarHeader className="border-b">
-        <div className="flex items-center gap-3 px-2 py-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-zinc-900 shrink-0">
-            <BookOpen className="h-5 w-5 text-white" />
+    <Sidebar className="border-r-0">
+      <SidebarHeader className="border-b-0 px-6 py-6">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 shrink-0 shadow-sm">
+            <BookOpen className="h-5 w-5 text-white" strokeWidth={2} />
           </div>
           <div className="flex-1 min-w-0">
-            <h2 className="font-rethink-sans text-base font-semibold text-zinc-900 truncate">
+            <h2 className="font-rethink-sans text-base font-semibold text-zinc-900 truncate tracking-tight">
               Cabinet Arturio
             </h2>
-            <p className="text-xs text-zinc-500">Formule LexCab</p>
+            <p className="text-xs text-zinc-500 font-medium">Formule LexCab</p>
           </div>
         </div>
       </SidebarHeader>
 
-      <SidebarContent>
-        {navigation.map((section) => (
-          <SidebarGroup key={section.title}>
-            <SidebarGroupLabel>{section.title}</SidebarGroupLabel>
+      <SidebarContent className="px-3 py-2">
+        {navigation.map((section, idx) => (
+          <SidebarGroup key={section.title} className={cn("px-0", idx > 0 && "mt-6")}>
+            <SidebarGroupLabel className="font-rethink-sans px-3 text-[11px] font-semibold text-zinc-900 uppercase tracking-wide mb-2 h-auto">
+              {section.title}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
-              <SidebarMenu>
-                {section.items.map((item) => (
-                  <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton asChild>
-                      <Link href={item.href}>
-                        <item.icon />
-                        <span>{item.label}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+              <SidebarMenu className="space-y-0.5">
+                {section.items.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <SidebarMenuItem key={item.href}>
+                      <SidebarMenuButton asChild>
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            "h-10 px-3 rounded-lg transition-all duration-200 group relative",
+                            isActive 
+                              ? "bg-zinc-100 text-zinc-900 font-medium shadow-sm" 
+                              : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
+                          )}
+                        >
+                          <img
+                            src={item.icon}
+                            alt=""
+                            className={cn(
+                              "h-[18px] w-[18px] transition-all",
+                              isActive ? "opacity-100" : "opacity-70 group-hover:opacity-90"
+                            )} 
+                          />
+                          <span className="font-rethink-sans text-sm font-normal transition-all">
+                            {item.label}
+                          </span>
+                          {isActive && (
+                            <ChevronRight className="h-3.5 w-3.5 ml-auto text-zinc-400" strokeWidth={2} />
+                          )}
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
       </SidebarContent>
 
-      <SidebarFooter className="border-t">
-        <div className="p-3 space-y-3">
+      <SidebarFooter className="border-t-0 px-4 pb-4">
+        <div className="space-y-3">
           {/* Timer */}
-          <div className="rounded-lg bg-zinc-50 border border-zinc-200 p-3">
-            <div className="text-center mb-2">
-              <div className="text-xl font-semibold text-zinc-900">{formatTime()}</div>
+          <div className="rounded-xl bg-gradient-to-br from-zinc-50 to-zinc-100/50 border border-zinc-200/60 p-4 shadow-sm">
+            <div className="text-center mb-3">
+              <div className="text-2xl font-bold text-zinc-900 tabular-nums tracking-tight">
+                {formatTime()}
+              </div>
             </div>
-            <div className="flex items-center gap-2 mb-2">
-              <button
-                type="button"
-                className="flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-900 transition-colors"
-              >
-                <LinkIcon className="h-3 w-3" />
-                <span>Lier à un dossier</span>
-              </button>
-            </div>
+            <button
+              type="button"
+              className="flex items-center justify-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-900 transition-colors w-full mb-3 py-1"
+            >
+              <LinkIcon className="h-3 w-3" strokeWidth={2} />
+              <span className="font-medium">Lier à un dossier</span>
+            </button>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={resetTimer}
-                className="flex h-7 w-7 items-center justify-center rounded-md hover:bg-zinc-200 transition-colors"
+                className="flex h-9 w-9 items-center justify-center rounded-lg hover:bg-white/80 border border-zinc-200/60 transition-all hover:shadow-sm active:scale-95"
                 title="Réinitialiser"
               >
-                <RotateCcw className="h-3.5 w-3.5 text-zinc-600" />
+                <RotateCcw className="h-3.5 w-3.5 text-zinc-700" strokeWidth={2} />
               </button>
               <button
                 type="button"
                 onClick={toggleTimer}
-                className="flex-1 flex items-center justify-center gap-2 h-7 rounded-md bg-zinc-900 text-white hover:bg-zinc-800 transition-colors text-sm"
+                className="flex-1 flex items-center justify-center gap-2 h-9 rounded-lg bg-gradient-to-b from-primary to-primary/90 text-white hover:from-primary/90 hover:to-primary/80 transition-all font-medium text-sm shadow-sm hover:shadow active:scale-[0.98]"
               >
-                <Play className="h-3 w-3" />
+                {isRunning ? (
+                  <Pause className="h-3.5 w-3.5 fill-white" strokeWidth={0} />
+                ) : (
+                  <Play className="h-3.5 w-3.5 fill-white" strokeWidth={0} />
+                )}
               </button>
             </div>
           </div>
 
-          <Separator />
+          <Separator className="bg-zinc-200/60" />
 
           {/* User */}
-          <div className="flex items-center gap-2 px-1">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-900 text-white text-xs font-semibold shrink-0">
+          <div className="flex items-center gap-3 px-2 py-1">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/80 text-white text-xs font-bold shrink-0 shadow-sm">
               MD
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-zinc-900 truncate">Me Martin Dupond</p>
-              <p className="text-xs text-zinc-500">Associé</p>
+              <p className="text-sm font-semibold text-zinc-900 truncate tracking-tight">Me Martin Dupond</p>
+              <p className="text-[11px] text-zinc-500 font-medium">Associé</p>
             </div>
           </div>
         </div>

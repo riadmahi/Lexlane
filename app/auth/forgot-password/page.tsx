@@ -49,7 +49,8 @@ export default function ForgotPasswordPage() {
         <div className="space-y-4">
           <Button
             onClick={() => setIsSubmitted(false)}
-            className="w-full bg-zinc-100 text-zinc-900 hover:bg-zinc-200 border border-zinc-200"
+            variant="secondary"
+            className="w-full"
             size="lg"
           >
             Renvoyer l'email
@@ -94,7 +95,7 @@ export default function ForgotPasswordPage() {
 
         <Button
           type="submit"
-          className="w-full bg-zinc-900 text-white hover:bg-zinc-800"
+          className="w-full"
           size="lg"
           disabled={isLoading}
         >

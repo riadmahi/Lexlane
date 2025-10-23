@@ -134,7 +134,7 @@ export default function OnboardingStep4Page() {
           </Button>
           <Button
             type="submit"
-            className="flex-1 bg-zinc-900 text-white hover:bg-zinc-800"
+            className="flex-1"
             size="lg"
           >
             Terminer

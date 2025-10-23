@@ -11,8 +11,7 @@ const inter = Inter({
 
 const rethinkSans = Rethink_Sans({
   variable: "--font-rethink-sans",
-  subsets: ["latin"],
-  weight: ["600"],
+  subsets: ["latin"]
 });
 
 export const metadata: Metadata = {

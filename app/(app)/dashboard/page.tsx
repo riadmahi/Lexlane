@@ -30,7 +30,6 @@ export default function DashboardPage() {
           <Button
             onClick={logout}
             variant="outline"
-            className="border-zinc-200 text-zinc-900 hover:bg-zinc-100"
           >
             Se déconnecter
           </Button>

@@ -103,7 +103,7 @@ export default function OnboardingStep2Page() {
                 onClick={() => setFormData({ ...formData, hasExistingCabinet: true })}
                 className={`rounded-lg border p-4 text-left transition-all ${
                   formData.hasExistingCabinet
-                    ? "border-zinc-900 bg-zinc-900 text-white"
+                    ? "border-primary bg-primary text-white"
                     : "border-zinc-200 bg-white text-zinc-900 hover:border-zinc-300"
                 }`}
               >
@@ -117,7 +117,7 @@ export default function OnboardingStep2Page() {
                 onClick={() => setFormData({ ...formData, hasExistingCabinet: false })}
                 className={`rounded-lg border p-4 text-left transition-all ${
                   !formData.hasExistingCabinet
-                    ? "border-zinc-900 bg-zinc-900 text-white"
+                    ? "border-primary bg-primary text-white"
                     : "border-zinc-200 bg-white text-zinc-900 hover:border-zinc-300"
                 }`}
               >
@@ -162,7 +162,7 @@ export default function OnboardingStep2Page() {
                     onClick={() => togglePracticeArea(area)}
                     className={`text-left text-sm px-3 py-2 rounded-md transition-all ${
                       formData.practiceAreas.includes(area)
-                        ? "bg-zinc-900 text-white"
+                        ? "bg-primary text-white"
                         : "bg-white text-zinc-900 hover:bg-zinc-100 border border-zinc-200"
                     }`}
                   >
@@ -191,7 +191,7 @@ export default function OnboardingStep2Page() {
           </Button>
           <Button
             type="submit"
-            className="flex-1 bg-zinc-900 text-white hover:bg-zinc-800"
+            className="flex-1"
             size="lg"
           >
             Continuer

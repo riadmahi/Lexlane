@@ -99,7 +99,7 @@ export default function SignInPage() {
 
         <Button
           type="submit"
-          className="w-full bg-zinc-900 text-white hover:bg-zinc-800"
+          className="w-full"
           size="lg"
           disabled={isLoading}
         >
