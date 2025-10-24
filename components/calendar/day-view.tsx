@@ -131,20 +131,31 @@ export function DayView({
                     key={event.id}
                     onClick={() => onEventClick(event)}
                     className={cn(
-                      "absolute left-2 right-2 rounded-md border px-3 py-2 pointer-events-auto hover:shadow-sm transition-shadow",
+                      "absolute left-2 right-2 rounded-md border px-3 py-2 pointer-events-auto hover:shadow-md transition-shadow text-left overflow-hidden",
                       getEventColor(event.type)
                     )}
                     style={{ top: `${top}px`, height: `${height}px`, zIndex: dayEvents.length - index }}
                   >
-                    <div className="font-medium text-sm leading-tight mb-1">
+                    <div className="font-semibold text-sm leading-tight mb-1.5">
                       {event.title}
                     </div>
-                    <div className="text-xs opacity-70">
+                    <div className="text-xs opacity-80 mb-2">
                       {event.startTime} - {event.endTime}
                     </div>
-                    {height > 80 && event.location && (
-                      <div className="text-xs opacity-70 mt-1 truncate">
-                        📍 {event.location}
+                    {height > 80 && (
+                      <div className="space-y-1 text-xs opacity-75">
+                        {event.clientName && (
+                          <div className="truncate">👤 {event.clientName}</div>
+                        )}
+                        {event.caseTitle && (
+                          <div className="truncate">📁 {event.caseTitle}</div>
+                        )}
+                        {event.associatedLawyer && (
+                          <div className="truncate">⚖️ {event.associatedLawyer}</div>
+                        )}
+                        {event.location && (
+                          <div className="truncate">📍 {event.location}</div>
+                        )}
                       </div>
                     )}
                   </button>

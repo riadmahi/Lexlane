@@ -13,6 +13,8 @@ export interface CalendarEvent {
   location?: string;
   caseId?: number;
   caseTitle?: string;
+  clientName?: string;
+  associatedLawyer?: string;
   attendees?: string[];
   color?: string;
 }

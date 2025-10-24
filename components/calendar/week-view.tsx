@@ -152,17 +152,32 @@ export function WeekView({
                         key={event.id}
                         onClick={() => onEventClick(event)}
                         className={cn(
-                          "absolute left-1 right-1 rounded-md border px-2 py-1.5 pointer-events-auto hover:shadow-sm transition-shadow",
+                          "absolute left-1 right-1 rounded-md border px-2 py-1.5 pointer-events-auto hover:shadow-md transition-shadow text-left overflow-hidden",
                           getEventColor(event.type)
                         )}
                         style={{ top: `${top}px`, height: `${height}px` }}
                       >
-                        <div className="font-medium text-xs leading-tight truncate">
+                        <div className="font-semibold text-xs leading-tight truncate mb-0.5">
                           {event.title}
                         </div>
-                        <div className="text-[10px] opacity-70 mt-0.5">
+                        <div className="text-[10px] opacity-80 mb-1">
                           {event.startTime}
                         </div>
+                        {height > 70 && (
+                          <div className="space-y-0.5 text-[10px] opacity-75">
+                            {event.clientName && (
+                              <div className="truncate">👤 {event.clientName}</div>
+                            )}
+                            {event.caseTitle && (
+                              <div className="truncate">📁 {event.caseTitle}</div>
+                            )}
+                          </div>
+                        )}
+                        {height > 100 && event.associatedLawyer && (
+                          <div className="text-[10px] opacity-75 truncate mt-0.5">
+                            ⚖️ {event.associatedLawyer}
+                          </div>
+                        )}
                       </button>
                     );
                   })}
