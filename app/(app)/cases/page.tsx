@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Search, Plus, Filter, MoreVertical, FolderOpen, Calendar, User, Clock, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,7 +50,7 @@ const mockCases = [
     assignedLawyer: {
       name: "Me Claire Bernard",
       initials: "CB",
-      color: "violet",
+      color: "primary",
     },
     type: "Droit immobilier",
     status: "Clos",
@@ -105,6 +106,8 @@ export default function CasesPage() {
     };
     return colors[color] || colors.zinc;
   };
+
+  const router = useRouter();
 
   return (
     <div className="flex flex-1 flex-col h-full bg-[#F6F6F3]">
@@ -177,6 +180,7 @@ export default function CasesPage() {
           {mockCases.map((caseItem) => (
             <div
               key={caseItem.id}
+              onClick={() => router.push(`/cases/${caseItem.id}`)}
               className="bg-white rounded-2xl border border-zinc-200/60 overflow-hidden shadow-sm hover:shadow-lg hover:border-zinc-300/60 transition-all duration-300 cursor-pointer group"
             >
               <div className={cn("h-1.5 bg-gradient-to-r", getColorClass(caseItem.color))} />
@@ -212,7 +216,7 @@ export default function CasesPage() {
                             "flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold text-white shrink-0",
                             caseItem.assignedLawyer.color === "emerald" && "bg-emerald-500",
                             caseItem.assignedLawyer.color === "blue" && "bg-blue-500",
-                            caseItem.assignedLawyer.color === "violet" && "bg-violet-500"
+                            caseItem.assignedLawyer.color === "primary" && "bg-primary"
                           )}>
                             {caseItem.assignedLawyer.initials}
                           </div>
