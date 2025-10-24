@@ -66,7 +66,7 @@ export function DayView({
   });
 
   return (
-    <div className="bg-white rounded-lg border border-zinc-200 overflow-hidden">
+    <div className="bg-white border border-zinc-200 overflow-hidden">
       {/* Day header */}
       <div className="p-4 border-b border-zinc-200">
         <div className="flex items-center gap-3">
@@ -82,10 +82,10 @@ export function DayView({
           </div>
           <div>
             <div className="text-sm text-zinc-500">
-              {currentDate.toLocaleDateString("en-US", { weekday: "long" })}
+              {currentDate.toLocaleDateString("fr-FR", { weekday: "long" })}
             </div>
             <div className="font-semibold text-zinc-900">
-              {currentDate.toLocaleDateString("en-US", { 
+              {currentDate.toLocaleDateString("fr-FR", { 
                 month: "long", 
                 year: "numeric" 
               })}

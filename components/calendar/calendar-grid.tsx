@@ -18,7 +18,7 @@ interface CalendarGridProps {
 }
 
 export function CalendarGrid({ days, onDayClick, onEventClick }: CalendarGridProps) {
-  const weekDays = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const weekDays = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
   const getEventColor = (priority: CalendarEvent["priority"], type: CalendarEvent["type"]) => {
     // Match the colors from the reference image

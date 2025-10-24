@@ -46,23 +46,23 @@ export function CalendarHeader({
 
   return (
     <div className="bg-white border-b border-zinc-200">
-      <div className="px-6 py-4">
-        <div className="flex items-center justify-between gap-6">
+      <div className="px-8 py-5">
+        <div className="flex items-center justify-between gap-8">
           {/* Left side - Date display */}
-          <div className="flex items-center gap-4">
-            <div className="text-center">
-              <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wide">
+          <div className="flex items-center gap-5">
+            <div className="flex flex-col items-center justify-center min-w-[60px]">
+              <div className="text-sm font-bold text-zinc-400 uppercase tracking-tight">
                 {getMonthAbbr()}
               </div>
-              <div className="text-2xl font-bold text-zinc-900">
+              <div className="text-4xl font-bold text-zinc-900 leading-none mt-1">
                 {currentDate.getDate()}
               </div>
             </div>
-            <div>
-              <h1 className="text-lg font-bold text-zinc-900 capitalize">
+            <div className="border-l border-zinc-200 pl-5">
+              <h1 className="text-xl font-bold text-zinc-900 capitalize mb-0.5">
                 {getMonthYear()}
               </h1>
-              <p className="text-xs text-zinc-500">
+              <p className="text-sm text-zinc-500">
                 {getDateRange()}
               </p>
             </div>
@@ -71,63 +71,85 @@ export function CalendarHeader({
           {/* Center - Navigation */}
           <div className="flex items-center gap-2">
             <Button
-              variant="ghost"
+              variant="outline"
               size="icon"
               onClick={onPrevious}
-              className="h-8 w-8 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
+              className="h-9 w-9"
             >
               <ChevronLeft className="h-4 w-4" />
+              <span className="sr-only">Précédent</span>
             </Button>
             <Button
               variant="outline"
-              size="sm"
               onClick={onToday}
-              className="h-8 px-3 text-xs font-medium"
+              className="h-9 px-4 text-sm font-medium"
             >
-              Today
+              Aujourd'hui
             </Button>
             <Button
-              variant="ghost"
+              variant="outline"
               size="icon"
               onClick={onNext}
-              className="h-8 w-8 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
+              className="h-9 w-9"
             >
               <ChevronRight className="h-4 w-4" />
+              <span className="sr-only">Suivant</span>
             </Button>
           </div>
 
           {/* Right side - View modes and actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Button
-              variant="ghost"
+              variant="outline"
               size="icon"
-              className="h-8 w-8 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100"
+              className="h-9 w-9"
             >
               <Search className="h-4 w-4" />
+              <span className="sr-only">Rechercher</span>
             </Button>
 
-            {/* View mode dropdown */}
-            <div className="relative">
-              <select
-                value={viewMode}
-                onChange={(e) => onViewModeChange(e.target.value as any)}
-                className="h-8 px-3 pr-8 text-xs font-medium bg-white border border-zinc-200 rounded-lg appearance-none cursor-pointer hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-primary/20"
+            {/* View mode buttons */}
+            <div className="flex items-center gap-1 border border-zinc-200 rounded-lg p-1">
+              <Button
+                variant={viewMode === "month" ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => onViewModeChange("month")}
+                className="h-7 px-3 text-xs font-medium"
               >
-                <option value="month">Month view</option>
-                <option value="week">Week view</option>
-                <option value="day">Day view</option>
-                <option value="agenda">Agenda view</option>
-              </select>
-              <ChevronRight className="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 text-zinc-400 pointer-events-none rotate-90" />
+                Mois
+              </Button>
+              <Button
+                variant={viewMode === "week" ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => onViewModeChange("week")}
+                className="h-7 px-3 text-xs font-medium"
+              >
+                Semaine
+              </Button>
+              <Button
+                variant={viewMode === "day" ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => onViewModeChange("day")}
+                className="h-7 px-3 text-xs font-medium"
+              >
+                Jour
+              </Button>
+              <Button
+                variant={viewMode === "agenda" ? "secondary" : "ghost"}
+                size="sm"
+                onClick={() => onViewModeChange("agenda")}
+                className="h-7 px-3 text-xs font-medium"
+              >
+                Agenda
+              </Button>
             </div>
 
             <Button
               onClick={onNewEvent}
-              size="sm"
-              className="h-8 gap-1.5 bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-medium px-3"
+              className="h-9 gap-2 text-sm font-medium px-4"
             >
-              <Plus className="h-3.5 w-3.5" />
-              Add event
+              <Plus className="h-4 w-4" />
+              Nouvel événement
             </Button>
           </div>
         </div>
