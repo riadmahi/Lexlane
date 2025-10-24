@@ -2,9 +2,24 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Plus, Filter, MoreVertical, FolderOpen, Calendar, User, Clock, ChevronDown } from "lucide-react";
+import { Search, Plus, Filter, MoreVertical, Calendar, User, Clock, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const mockCases = [
@@ -176,86 +191,117 @@ export default function CasesPage() {
 
       {/* Content */}
       <div className="flex-1 overflow-auto p-8">
-        <div className="grid gap-4">
-          {mockCases.map((caseItem) => (
-            <div
-              key={caseItem.id}
-              onClick={() => router.push(`/cases/${caseItem.id}`)}
-              className="bg-white rounded-2xl border border-zinc-200/60 overflow-hidden shadow-sm hover:shadow-lg hover:border-zinc-300/60 transition-all duration-300 cursor-pointer group"
-            >
-              <div className={cn("h-1.5 bg-gradient-to-r", getColorClass(caseItem.color))} />
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className={cn(
-                      "flex h-14 w-14 items-center justify-center rounded-xl shrink-0 shadow-sm border bg-gradient-to-br",
-                      getColorClass(caseItem.color)
-                    )}>
-                      <FolderOpen className="h-7 w-7 text-zinc-700" strokeWidth={1.5} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold text-zinc-900 truncate group-hover:text-primary transition-colors">
-                          {caseItem.title}
-                        </h3>
-                        <span className="text-xs text-zinc-500 font-mono px-2 py-1 bg-zinc-100 rounded-md">
-                          #{caseItem.number}
-                        </span>
+        <div className="bg-white rounded-md border border-zinc-200/60 shadow-sm overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-zinc-50 hover:bg-zinc-50 border-b border-zinc-200">
+                <TableHead className="font-semibold text-zinc-900 w-[50px]">#</TableHead>
+                <TableHead className="font-semibold text-zinc-900">Dossier</TableHead>
+                <TableHead className="font-semibold text-zinc-900">Client</TableHead>
+                <TableHead className="font-semibold text-zinc-900">Avocat assigné</TableHead>
+                <TableHead className="font-semibold text-zinc-900">Type</TableHead>
+                <TableHead className="font-semibold text-zinc-900">Statut</TableHead>
+                <TableHead className="font-semibold text-zinc-900">Priorité</TableHead>
+                <TableHead className="font-semibold text-zinc-900">Échéance</TableHead>
+                <TableHead className="text-right font-semibold text-zinc-900">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {mockCases.map((caseItem) => (
+                <TableRow 
+                  key={caseItem.id}
+                  onClick={() => router.push(`/cases/${caseItem.id}`)}
+                  className="cursor-pointer hover:bg-zinc-50/50 border-b border-zinc-100"
+                >
+                  <TableCell className="font-mono text-xs text-zinc-500">
+                    #{caseItem.number}
+                  </TableCell>
+                  <TableCell>
+                    <div>
+                      <div className="font-semibold text-zinc-900 mb-1">
+                        {caseItem.title}
                       </div>
-                      <div className="flex items-center gap-5 text-sm text-zinc-600">
-                        <div className="flex items-center gap-2">
-                          <User className="h-4 w-4 text-zinc-400" strokeWidth={2} />
-                          <span>{caseItem.client}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4 text-zinc-400" strokeWidth={2} />
-                          <span>Échéance: {new Date(caseItem.deadline).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className={cn(
-                            "flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-semibold text-white shrink-0",
-                            caseItem.assignedLawyer.color === "emerald" && "bg-emerald-500",
-                            caseItem.assignedLawyer.color === "blue" && "bg-blue-500",
-                            caseItem.assignedLawyer.color === "primary" && "bg-primary"
-                          )}>
-                            {caseItem.assignedLawyer.initials}
-                          </div>
-                          <span className="text-xs">{caseItem.assignedLawyer.name}</span>
-                        </div>
-                        <div className="flex items-center gap-2 ml-auto">
-                          <Clock className="h-3.5 w-3.5 text-zinc-400" strokeWidth={2} />
-                          <span className="text-xs">{caseItem.lastUpdate}</span>
-                        </div>
+                      <div className="flex items-center gap-2 text-xs text-zinc-500">
+                        <Clock className="h-3 w-3" strokeWidth={2} />
+                        {caseItem.lastUpdate}
                       </div>
                     </div>
-                  </div>
-                  <button className="p-2 hover:bg-zinc-100 rounded-lg transition-colors opacity-0 group-hover:opacity-100">
-                    <MoreVertical className="h-5 w-5 text-zinc-400" />
-                  </button>
-                </div>
-
-                <div className="flex items-center gap-2 flex-wrap pt-4 border-t border-zinc-100">
-                  <div className="flex items-center gap-1.5">
-                    <div className={cn("h-2 w-2 rounded-full", getPriorityDot(caseItem.priority))} />
-                    <span className="text-xs font-medium text-zinc-600">
-                      {caseItem.priority}
-                    </span>
-                  </div>
-                  <div className="h-1 w-1 rounded-full bg-zinc-300" />
-                  <span className={cn(
-                    "px-3 py-1.5 rounded-lg text-xs font-medium border",
-                    getStatusColor(caseItem.status)
-                  )}>
-                    {caseItem.status}
-                  </span>
-                  <div className="h-1 w-1 rounded-full bg-zinc-300" />
-                  <span className="px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-50 text-zinc-700 border border-zinc-200/60">
-                    {caseItem.type}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))}
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2 text-sm text-zinc-700">
+                      <User className="h-4 w-4 text-zinc-400" strokeWidth={2} />
+                      {caseItem.client}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <div className={cn(
+                        "flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold text-white shrink-0",
+                        caseItem.assignedLawyer.color === "emerald" && "bg-emerald-500",
+                        caseItem.assignedLawyer.color === "blue" && "bg-blue-500",
+                        caseItem.assignedLawyer.color === "primary" && "bg-primary"
+                      )}>
+                        {caseItem.assignedLawyer.initials}
+                      </div>
+                      <span className="text-sm text-zinc-700">{caseItem.assignedLawyer.name}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="outline" className="bg-zinc-50 text-zinc-700 border-zinc-200">
+                      {caseItem.type}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge className={cn("border", getStatusColor(caseItem.status))}>
+                      {caseItem.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2">
+                      <div className={cn("h-2 w-2 rounded-full", getPriorityDot(caseItem.priority))} />
+                      <span className="text-sm text-zinc-700">{caseItem.priority}</span>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex items-center gap-2 text-sm text-zinc-700">
+                      <Calendar className="h-4 w-4 text-zinc-400" strokeWidth={2} />
+                      {new Date(caseItem.deadline).toLocaleDateString('fr-FR', { 
+                        day: 'numeric', 
+                        month: 'short', 
+                        year: 'numeric' 
+                      })}
+                    </div>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                        <Button variant="ghost" className="h-8 w-8 p-0 hover:bg-zinc-100">
+                          <MoreVertical className="h-4 w-4 text-zinc-600" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuItem onClick={(e) => e.stopPropagation()}>
+                          Voir le dossier
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={(e) => e.stopPropagation()}>
+                          Modifier
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={(e) => e.stopPropagation()}>
+                          Partager
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-red-600"
+                        >
+                          Supprimer
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
     </div>
